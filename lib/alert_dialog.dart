@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
 class MyCustomAlertDialog extends StatefulWidget {
-  const MyCustomAlertDialog({super.key});
+  String title;
+  String message;
+  Function() onOkBtnClick;
+
+  MyCustomAlertDialog({
+    super.key,
+    required this.title,
+    required this.message,
+    required this.onOkBtnClick
+  });
 
   @override
   State<MyCustomAlertDialog> createState() => _MyCustomAlertDialogState();
@@ -9,9 +18,17 @@ class MyCustomAlertDialog extends StatefulWidget {
 
 class _MyCustomAlertDialogState extends State<MyCustomAlertDialog> {
 
-
   @override
   Widget build(BuildContext context) {
-    return AlertDialog();
+    return AlertDialog(
+      title:  Text(widget.title),
+      content:  Text(widget.message),
+      actions: [
+        TextButton(
+            onPressed: widget.onOkBtnClick,
+            child: const Text('Restart')
+        ),
+      ],
+    );
   }
 }

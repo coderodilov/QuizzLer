@@ -31,19 +31,35 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   QuestionBrain quizBrain = QuestionBrain();
   List<Icon> scoreKeeper = [];
+  int correctAnswers = 0;
 
-  void checkUserAnswer(bool userPickedAnswer){
+  void checkUserAnswer(bool userPickedAnswer) {
     bool correctAnswer = quizBrain.getCorrectAnswer();
-    if(correctAnswer == userPickedAnswer){
-      scoreKeeper.add(const Icon(Icons.check, color: Colors.green,));
+    if (correctAnswer == userPickedAnswer) {
+      correctAnswers++;
+      scoreKeeper.add(const Icon(
+        Icons.check,
+        color: Colors.green,
+      ));
     } else {
-      scoreKeeper.add(const Icon(Icons.close, color: Colors.red,));
+      scoreKeeper.add(const Icon(
+        Icons.close,
+        color: Colors.red,
+      ));
     }
     setState(() {
-      quizBrain.nextQuestion(context);
+      quizBrain.nextQuestion(
+          context: context,
+          message: 'Total correct answers: $correctAnswers/${quizBrain.getTotalQuestions()}',
+          onClick: () {
+            Navigator.pop(context);
+            correctAnswers = 0;
+            setState(() {
+              scoreKeeper.clear();
+            });
+          });
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +76,7 @@ class _QuizPageState extends State<QuizPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-               Expanded(
+              Expanded(
                 flex: 5,
                 child: Center(
                   child: Padding(
@@ -83,8 +99,7 @@ class _QuizPageState extends State<QuizPage> {
                     ),
                     onPressed: () => checkUserAnswer(true),
                     child: const Text('True',
-                        style: TextStyle(color: Colors.white, fontSize: 16)
-                    ),
+                        style: TextStyle(color: Colors.white, fontSize: 16)),
                   ),
                 ),
               ),
@@ -98,8 +113,7 @@ class _QuizPageState extends State<QuizPage> {
                     ),
                     onPressed: () => checkUserAnswer(false),
                     child: const Text('False',
-                        style: TextStyle(color: Colors.white, fontSize: 16)
-                    ),
+                        style: TextStyle(color: Colors.white, fontSize: 16)),
                   ),
                 ),
               ),
@@ -107,8 +121,9 @@ class _QuizPageState extends State<QuizPage> {
                 scrollDirection: Axis.horizontal,
                 reverse: true,
                 child: Container(
-                  margin: const EdgeInsets.symmetric(
-                      horizontal: 12, vertical: 12),
+                  height: 20,
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                   child: Row(
                     children: scoreKeeper,
                   ),
