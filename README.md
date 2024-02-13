@@ -4,13 +4,7 @@ A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+![Quizzler](https://github.com/coderodilov/flutter_quizzLer_app/assets/91076403/28f69633-54d6-4762-a9a4-9a07958b5671)
 
-A few resources to get you started if this is your first Flutter project:
+![image](https://github.com/coderodilov/flutter_quizzLer_app/assets/91076403/a65b8251-8bbe-46b6-a8fb-186e0ae5713f)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
